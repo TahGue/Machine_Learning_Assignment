@@ -45,7 +45,7 @@ class MovieRecommendationSystem:
            
             user_sample = full_ratings['userId'].drop_duplicates().sample(
                 n=min(50000, full_ratings['userId'].nunique()), 
-                random_state=42
+                
             )
             self.ratings = full_ratings[full_ratings['userId'].isin(user_sample)]
             print(f"Loaded {len(self.ratings)} ratings (strategic sample)")
@@ -168,7 +168,7 @@ class MovieRecommendationSystem:
         print(f"User-item matrix shape: {user_item_matrix.shape}")
         
         
-        self.svd_model = TruncatedSVD(n_components=n_components, random_state=42)
+        self.svd_model = TruncatedSVD(n_components=n_components)
         self.collaborative_matrix = self.svd_model.fit_transform(user_item_matrix)
         
        
